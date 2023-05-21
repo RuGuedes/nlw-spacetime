@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /*Trabalhar em forma de caixa*/
+  text-align: center;
+}
+
+:root {
+  font-size: 16px; /*para celular - padrão*/
+}
+::-webkit-scrollbar {
+  /*Tamanho do scroll*/
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  /*Cor do scroll*/
+  background-color: #eaeaea;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #a3a37a;
+}
+@keyframes entering {
+  /*transição de entrada*/
+  from {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  background-color: #121215;
+  color: #eaeaea;
+
+  font-family: "Roboto", sans-serif;
+
+  display: grid;
+  grid-template-areas: "profile timeline"; /*Display do tipo gride, há duas colunas uma profile e outra timeline*/
+  grid-template-columns: 1fr 1fr; /*Cada coluna tem 1 fração da página, divisão igual*/
+  grid-template-rows: 100vh; /*Linha, ocupar todo espaço disponvel*/
+  overflow-y: hidden; /*ocultar barra do scroll*/
+}
+nav {
+  padding: 64px; /*Espaçamento da tela*/
+  grid-area: timeline;
+
+  overflow-y: scroll; /*Só o lado direto que irá rolar*/
+
+  animation: entering 2s ease-in-out; /*animação timeline*/
+}
+.memory {
+  display: flex;
+  flex-direction: column; /*Display em coluna*/
+  gap: 16px; /*Espaçamento entre os paragrafos*/
+
+  text-decoration: none; /*Tirar o sublinhado*/
+  margin-bottom: 64px; /*Espaçamento entre divs*/
+}
+.memory small {
+  color: #bebebf;
+  font-size: 0.75rem;
+}
+.memory h1 {
+  font-size: 2rem;
+  color: #eaeaea;
+}
+.memory img {
+  width: auto;
+  height: 280px;
+  object-fit: cover; /*Acompanhamento da fonte ao esticar a tela*/
+  border-radius: 8px; /*Borda da foto*/
+
+  transition: transform 0.2s ease-in-out; /*transição*/
+}
+
+.memory:hover img {
+  transform: scale(1.1); /*Aumentar a escala na foto*/
+}
+.memory div {
+  /*Efeito do zoom sem sair da tela*/
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.memory p {
+  font-size: 1.2rem;
+  color: #bebebf;
+  line-height: 28px; /*Espaçamento da fonte*/
+  text-align: justify;
+}
+
+aside {
+  grid-area: profile; /*Separou as colunas*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px; /*Afastamento*/
+
+  border-right: 1px solid;
+  border-image: linear-gradiente(#727275, #2c2c31) 1; /*Borda do meio, começa com uma cor e termina com outra*/
+
+  background-image: url(./assets/background.svg); /*Definindo a imagem de fundo do profile*/
+  background-position: top right; /*Imagem grudar na tela ao lado*/
+  background-repeat: no-repeat; /*Não repetir a imagem*/
+  background-size: auto 100%;
+
+  overflow-y: hidden;
+}
+aside * {
+  animation: entering 2s ease-in-out; /*animação profile*/
+}
+aside a img {
+  /*Selecionando a 2ª imagem - IMPORTANTE*/
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+
+  border: 4px solid transparent; /*Definindo a borda e as cores*/
+  background: linear-gradient(#d39333, #ed5636, #633bbc) padding-box,
+    linear-gradient(260deg, #d39333, #ed5636, #633bbc) border-box; /*Efeito da borda*/
+}
+aside p {
+  font-size: 2rem;
+  text-align: center;
+}
+aside span {
+  font-size: 0.75rem;
+  color: #9e9ea0;
+}
+
+.instagram a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 1rem;
+  color: #9e9ea0;
+  align-items: center;
+}
+.instagram img {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    grid-template-areas:
+      "profile"
+      "timeline";
+
+    overflow: visible;
+  }
+
+  aside {
+    border-right: none;
+    padding: 32px 12px;
+  }
+  nav {
+    overflow-y: hidden;
+    padding: 100px;
+  }
+}
